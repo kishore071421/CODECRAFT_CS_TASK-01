@@ -1,62 +1,121 @@
+# 🔐 Caesar Cipher Encryption & Decryption Tool
+
+This project implements a **Caesar Cipher**, one of the oldest and simplest encryption techniques.  
+The program allows the user to:
+
+- Encrypt a message  
+- Decrypt a message  
+- Choose any shift value  
+- Automatically validate user input  
+
+---
+
+## 📌 **Features**
+
+### ✔ Encrypt Text  
+Enter any message and a shift value to encrypt it.
+
+### ✔ Decrypt Text  
+Decrypt any Caesar-encrypted message by applying the negative shift.
+
+### ✔ Input Validation  
+Prevents errors by ensuring only valid integers are accepted for shift values.
+
+### ✔ Supports Uppercase & Lowercase  
+Non-alphabetic characters remain unchanged.
+
+---
+
+## 📂 **Project Structure**
+
+```
+Caesar-Cipher/
+│
+├── caesar_cipher.py     # Main program
+└── README.md            # Documentation
+```
+
+---
+
+## 🛠 **How It Works**
+
+Caesar Cipher shifts each letter by a fixed number within the alphabet.
+
+Example:
+
+```
+Plain Text: HELLO
+Shift: 3
+Encrypted: KHOOR
+```
+
+Decryption simply reverses the shift.
+
+---
+
+## ▶️ **Usage**
+
+### **Run the program**
+```
+python caesar_cipher.py
+```
+
+### **Menu Options**
+
+```
+1 → Encrypt a message
+2 → Decrypt a message
+3 → Exit the program
+```
+
+---
+
+## 💻 **Code Snippet**
+
+```python
 def caesar_shift(char, shift):
-    """Shift a single character (helper function)."""
     if not char.isalpha():
         return char
-
-    shift %= 26  # Normalize shift
-
+    shift %= 26
     base = 65 if char.isupper() else 97
     return chr((ord(char) - base + shift) % 26 + base)
 
 
 def encrypt(text, shift):
-    """Encrypt text using Caesar Cipher."""
     return "".join(caesar_shift(c, shift) for c in text)
 
 
 def decrypt(text, shift):
-    """Decrypt text using Caesar Cipher."""
     return encrypt(text, -shift)
+```
 
+---
 
-def get_int(prompt):
-    """Safely get an integer input from user."""
-    while True:
-        try:
-            return int(input(prompt))
-        except ValueError:
-            print("Invalid input! Please enter a number.")
+## 📘 **Example Output**
 
+```
+=== Caesar Cipher Tool ===
+1. Encrypt a message
+2. Decrypt a message
+3. Exit
 
-def print_menu():
-    """Display the program menu."""
-    print("\n=== Caesar Cipher Tool ===")
-    print("1. Encrypt a message")
-    print("2. Decrypt a message")
-    print("3. Exit")
+Enter your choice: 1
+Enter your message: hello world
+Enter shift value: 5
 
+Encrypted Message: mjqqt btwqi
+```
 
-def main():
-    while True:
-        print_menu()
-        choice = input("Enter your choice: ").strip()
+---
 
-        if choice in {"1", "2"}:
-            message = input("Enter your message: ")
-            shift = get_int("Enter shift value: ")
+## 🏆 **Author**
 
-            if choice == "1":
-                print("Encrypted Message:", encrypt(message, shift))
-            else:
-                print("Decrypted Message:", decrypt(message, shift))
+**B Bharath kishore**  
+This project is developed as part of internship task requirements.
 
-        elif choice == "3":
-            print("Exiting... Goodbye!")
-            break
+---
 
-        else:
-            print("Invalid choice! Please choose 1, 2, or 3.")
+## 📄 **License**
 
+This project is free to use for learning and educational purposes.
 
-if __name__ == "__main__":
-    main()
